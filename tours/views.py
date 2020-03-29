@@ -40,6 +40,7 @@ class TourPageView(View):
             request,
             self.template_name,
             context={
+                'from': departures[tours[id]["departure"]],
                 'tour': tours[id],
             }
         )
