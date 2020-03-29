@@ -1,1 +1,1 @@
-web: gunicorn smithee.wsgi
+web: gunicorn django_tours.wsgi
