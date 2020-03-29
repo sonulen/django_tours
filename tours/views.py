@@ -40,7 +40,7 @@ class TourPageView(View):
             request,
             self.template_name,
             context={
-                'from': departures[tours[id]["departure"]],
+                'from': departures[tours[id]["departure"]].split(' ')[1],
                 'tour': tours[id],
             }
         )
@@ -63,8 +63,8 @@ class DeparturePageView(View):
             request,
             self.template_name,
             context={
-                'departure': departure,
-                'tours': filtered_tours
+                'departure': departures[departure].split(' ')[1],
+                'tours': filtered_tours,
             }
         )
 
