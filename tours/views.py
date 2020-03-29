@@ -1,16 +1,30 @@
 from django.http import (Http404, HttpResponse)
 from django.shortcuts import render
 from django.views import View
-from tours.data import (departures, tours)
-
+from tours.data import (subtitle, description, departures, tours)
+from random import shuffle
 
 class MainPageView(View):
 
     template_name = "main.html"
 
     def get(self, request):
+        # Перемешаем словарь туров.
+        # Т.к. shuffle умеет работать только с list
+        # Возьмем лист из ключей от tours - перемешаем его
+        # На его основе сгенерим новый словарь
+        shuffled_keys = list(tours.keys())
+        shuffle(shuffled_keys)
+        shuffled_tours = dict((key,tours[key]) for key in shuffled_keys[:6])
+
         return render(
-            request, self.template_name
+            request, 
+            self.template_name,
+            context={
+                'subtitle' : subtitle,
+                'description' : description,
+                'tours': shuffled_tours,
+            }
         )
 
 
@@ -26,6 +40,7 @@ class TourPageView(View):
             request,
             self.template_name,
             context={
+                'from': departures[tours[id]["departure"]].split(' ')[1],
                 'tour': tours[id],
             }
         )
@@ -48,8 +63,8 @@ class DeparturePageView(View):
             request,
             self.template_name,
             context={
-                'departure': departure,
-                'tours': filtered_tours
+                'departure': departures[departure].split(' ')[1],
+                'tours': filtered_tours,
             }
         )
 
