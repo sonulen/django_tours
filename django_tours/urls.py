@@ -13,7 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import re_path, path
+from django.views.generic.base import RedirectView
 
 from tours.views import (
     MainPageView, TourPageView, DeparturePageView, custom_404
@@ -21,7 +22,11 @@ from tours.views import (
 
 handler404 = custom_404
 
+
+favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
+
 urlpatterns = [
+    re_path(r'^favicon\.ico$', favicon_view),
     path('', MainPageView.as_view(), name='main_page'),
     path('tour/<int:id>/', TourPageView.as_view(), name='tour_page'),
     path('departure/<str:departure>/',
