@@ -20,10 +20,13 @@ from tours.views import (
     MainPageView, TourPageView, DeparturePageView, custom_404
 )
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 handler404 = custom_404
 
 
-favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
+favicon_view = RedirectView.as_view(url=settings.STATIC_URL + '/favicon.ico', permanent=True)
 
 urlpatterns = [
     re_path(r'^favicon\.ico$', favicon_view),
@@ -31,4 +34,4 @@ urlpatterns = [
     path('tour/<int:id>/', TourPageView.as_view(), name='tour_page'),
     path('departure/<str:departure>/',
          DeparturePageView.as_view(), name='departure_page'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
