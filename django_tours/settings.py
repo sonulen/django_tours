@@ -66,7 +66,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # Контекстный процессор для меню
-                'tours.context_processors.menu_departures_list',
+                'tours.context_processors.menu_data',
             ],
         },
     },

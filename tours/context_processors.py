@@ -1,4 +1,4 @@
-from tours.data import departures
+from tours.data import departures, title
 
-def menu_departures_list(request):
-    return {"departures": departures}
+def menu_data(request):
+    return {"departures": departures, "title" : title}
