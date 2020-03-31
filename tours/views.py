@@ -4,6 +4,7 @@ from django.views import View
 from tours.data import (subtitle, description, departures, tours)
 from random import shuffle
 
+
 class MainPageView(View):
 
     template_name = "main.html"
@@ -15,14 +16,14 @@ class MainPageView(View):
         # На его основе сгенерим новый словарь
         shuffled_keys = list(tours.keys())
         shuffle(shuffled_keys)
-        shuffled_tours = dict((key,tours[key]) for key in shuffled_keys[:6])
+        shuffled_tours = dict((key, tours[key]) for key in shuffled_keys[:6])
 
         return render(
-            request, 
+            request,
             self.template_name,
             context={
-                'subtitle' : subtitle,
-                'description' : description,
+                'subtitle': subtitle,
+                'description': description,
                 'tours': shuffled_tours,
             }
         )

@@ -27,7 +27,7 @@ pip install -r requirements.txt
 
 - запустить django-проект
 ```shell script
-./manage.py runserver
+gunicorn django_tours.wsgi
 ```
 
 - открыть в браузере http://localhost:8000 

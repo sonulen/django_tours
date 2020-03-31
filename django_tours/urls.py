@@ -26,12 +26,13 @@ from django.conf.urls.static import static
 handler404 = custom_404
 
 
-favicon_view = RedirectView.as_view(url=settings.STATIC_URL + '/favicon.ico', permanent=True)
+favicon_view = RedirectView.as_view(
+    url=settings.STATIC_URL + '/favicon.ico', permanent=True)
 
 urlpatterns = [
     re_path(r'^favicon\.ico$', favicon_view),
-    path('', MainPageView.as_view(), name='main_page'),
-    path('tour/<int:id>/', TourPageView.as_view(), name='tour_page'),
+    path('', MainPageView.as_view(), name='main'),
+    path('tour/<int:id>/', TourPageView.as_view(), name='tour_detail'),
     path('departure/<str:departure>/',
-         DeparturePageView.as_view(), name='departure_page'),
+         DeparturePageView.as_view(), name='departure_detail'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
